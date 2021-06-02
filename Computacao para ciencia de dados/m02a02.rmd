@@ -1,0 +1,44 @@
+---
+title: "Leitura/importação dados"
+output: html_notebook
+---
+getwd()
+setwd("/home/rogerio/dados")
+
+library(tidyverse)
+
+#importa dados para dataframe senado
+senado = read_csv(senado.csv)
+
+head(senado)
+tail(senado)
+
+#exibe o tipo da variável
+class(senado)
+
+#resumo dos dados, informações estatísticas
+summary(senado)
+
+#estrutura, tipos dos dados
+str(senado)
+
+
+med = read_delim("TA_PRECOS_MEDICAMENTOS.csv",delim = "|")
+
+data1 = read_fwf("fwf-sample.txt", col_positions = fwf_widths(c(20,10,12),c("nome","estado","cod")))
+
+library(RMySQL)
+
+mydb = dbConnect(MySQL(), user="root", password="admin", dbname="reddit", host="127.0.0.1")
+dbListTables(mydb)
+
+dbListFields(mydb, "users")
+
+pointer = dbSendQuery(mydb, "select id, Label, Degree, closnessecentrality, betweenesscentrality from uusers where id >= 7000")
+
+users = fetch(pointer, 6)
+
+dbDisconnect(mydb)
+
+
+...
